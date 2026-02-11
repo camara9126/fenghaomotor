@@ -15,6 +15,9 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
+     <!-- CSS -->
+    <link rel="stylesheet" href="{{asset('asset/style.css')}}">
+    
      <!-- Icon Image -->
      <link rel="shortcut icon" href="{{asset('asset/logo/logo bas.png')}}"/>
     
@@ -521,7 +524,7 @@
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end">
                         <li><a class="dropdown-item" href="{{ route('profile.edit') }}"><i class="fas fa-user me-2"></i> Mon profil</a></li>
-                        <li><a class="dropdown-item" href="#"><i class="fas fa-tools me-2"></i> Parametre</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i> Parametre</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li>
                             <form method="POST" action="{{ route('logout') }}">
@@ -567,69 +570,6 @@
                             </div>-->
                         </div>
                     </header>
-                    
-                    <div class="row mb-5">
-                            <h5>Solvabilité de l’entreprise</h5>
-                        <div class="col-12">
-                            <div class="stats-summary">
-                                <div class="stat-card orders">
-                                    <div class="stat-icon">
-                                        <i class="fas fa-right-left"></i>
-                                    </div>
-                                    <div class="stat-info">
-                                        <h3>Recettes</h3>
-                                        <div class="stat-value"> XOF</div>
-                                    </div>
-                                </div>
-
-                                <div class="stat-card revenue">
-                                    <div class="stat-icon">
-                                        <i class="fas fa-arrow-right-from-bracket"></i>
-                                    </div>
-                                    <div class="stat-info">
-                                        <h3>Dépenses</h3>
-                                        <div class="stat-value"> XOF</div>
-                                    </div>
-                                </div>
-
-                                <div class="stat-card products">
-                                    <div class="stat-icon">
-                                        <i class="fas fa-money-bills"></i>
-                                    </div>
-                                    <div class="stat-info">
-                                        <h3>Trésorerie</h3>
-                                        <div class="stat-value">
-                                            <strong class="">
-                                                XOF
-                                            </strong>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="stat-card customers">
-                                    <div class="stat-icon">
-                                        <i class="fa-solid fa-square-poll-vertical"></i>
-                                    </div>
-                                    <div class="stat-info">
-                                        <h3>Statut solvabilite</h3>
-                                        <div class="stat-value">
-                                             <span class="badge 
-                                               ">
-                                               
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                           
-                                <h5><span class="text-success" style="text-decoration: underline;">NB :</span> Votre entreprise est solvable .</h5>
-                            
-                                <h5><span class="text-danger"style="text-decoration: underline;">NB :</span> Votre entreprise est insolvable .</h5>
-                        
-                        </div>
-                    </div>
 
                    
                     <h5>Donnees Statistiques mensuels:</h5>
@@ -680,12 +620,12 @@
 
         </div>
     </div>
-            <!-- Footer -->
+        <!-- Footer -->
         <footer class="footer">
             <div class="container-fluid">
                 <div class="row align-items-center">
                     <div class="col-md-6">
-                        <p class="mb-0 text-muted">© <?= now()->year ?> B-Manager. Tous droits réservés.</p>
+                        <p class="mb-0 text-muted">© <?= now()->year ?> Fenghao Motor SN. Tous droits réservés.</p>
                     </div>
                     <div class="col-md-6 text-md-end">
                         <p class="mb-0 text-muted">Version 1.0.0</p>
@@ -887,54 +827,6 @@
             }
         });
 
-        // Gestion du changement de mois/année
-        document.getElementById('monthSelect').addEventListener('change', function() {
-            updateDashboard(this.value, document.getElementById('yearSelect').value);
-        });
-
-        document.getElementById('yearSelect').addEventListener('change', function() {
-            updateDashboard(document.getElementById('monthSelect').value, this.value);
-        });
-
-       function updateDashboard(month, year) {
-
-            fetch(`/dashboard/stats?month=${month}&year=${year}`)
-            .then(res => res.json())
-            .then(data => {
-
-                /* 1️⃣ Commandes */
-                commandesChart.data.labels = data.commandes.map(i => i.jour);
-                commandesChart.data.datasets[0].data = data.commandes.map(i => i.total);
-                commandesChart.update();
-
-                /* 2️⃣ Chiffre d'affaires */
-                caChart.data.datasets[0].data = [data.ca];
-                caChart.update();
-
-                /* 3️⃣ Produits */
-                produitsChart.data.labels = data.produits.map(p => p.produit.nom);
-                produitsChart.data.datasets[0].data = data.produits.map(p => p.total);
-                produitsChart.update();
-
-                /* 4️⃣ Statuts */
-                statutChart.data.labels = data.statuts.map(s => s.statut);
-                statutChart.data.datasets[0].data = data.statuts.map(s => s.total);
-                statutChart.update();
-            })
-            .catch(err => console.error(err));
-        }
-
-        // Fonction d'export
-        function exportData(format) {
-            if (format === 'png') {
-                alert('Export des graphiques au format PNG (simulation)');
-            } else if (format === 'pdf') {
-                alert('Génération du rapport PDF (simulation)');
-            }
-        }
-
-        // Sélectionner le mois actuel dans le sélecteur
-        document.getElementById('monthSelect').value = currentMonthIndex;
     </script>
 
 
@@ -968,64 +860,6 @@
                 }
             });
         }
-        
-        // Initialize sales chart
-        document.addEventListener('DOMContentLoaded', function() {
-            const ctx = document.getElementById('salesChart').getContext('2d');
-            const salesChart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Août', 'Sep', 'Oct', 'Nov', 'Déc'],
-                    datasets: [{
-                        label: 'Ventes (€)',
-                        data: [6500, 8100, 7500, 9200, 12540, 11000, 13500, 12000, 9800, 11200, 14000, 15000],
-                        borderColor: '#4361ee',
-                        backgroundColor: 'rgba(67, 97, 238, 0.1)',
-                        borderWidth: 3,
-                        fill: true,
-                        tension: 0.3
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            display: false
-                        }
-                    },
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            grid: {
-                                drawBorder: false
-                            },
-                            ticks: {
-                                callback: function(value) {
-                                    return '€' + value.toLocaleString();
-                                }
-                            }
-                        },
-                        x: {
-                            grid: {
-                                display: false
-                            }
-                        }
-                    }
-                }
-            });
-            
-            // Handle window resize
-            window.addEventListener('resize', function() {
-                salesChart.resize();
-                
-                // Auto-close sidebar when switching to desktop
-                if (window.innerWidth >= 992) {
-                    sidebar.classList.remove('active');
-                    overlay.classList.remove('active');
-                }
-            });
-        });
         
         // Make sure chart resizes properly on load
         window.dispatchEvent(new Event('resize'));

@@ -31,7 +31,7 @@
                                                 <th>Nom</th>
                                                 <th>Email</th>
                                                 <th>Role</th>
-                                                <th>Action</th>
+                                                <th>Date de creation</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -40,15 +40,7 @@
                                                 <td>{{$u->name}}</td>
                                                 <td>{{$u->email}}</td>
                                                 <td>{{$u->role}}</td>
-                                                <td>
-                                                    <form action="{{ route('user.destroy', $u) }}" method="POST" onsubmit="return confirm('Confirmer la suppression ?')">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button class="btn btn-sm">
-                                                            <i class="fa fa-trash text-danger"></i>
-                                                        </button>
-                                                    </form>
-                                                </td>
+                                                <td>{{$u->created_at->format('j / F / Y')}}</td>
                                                 
                                             @empty
                                                 <tr>

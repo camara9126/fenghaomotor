@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Client;
-use App\Models\Fournisseur;
-use App\Models\Pack;
+use App\Models\Depense;
+use DB;
 use App\Models\Produit;
 use App\Models\Recette;
-use App\Models\StockMouvement;
 use App\Models\Vente;
 use App\Models\VenteItem;
 use Carbon\Carbon;
@@ -22,26 +20,51 @@ class DashboardController extends Controller
     {
         $entreprise = request()->user()->entreprise;
 
-        $fournisseurs = Fournisseur::limit(3)->latest()->get();
-        $produits = Produit::with('fournisseur')->limit(3)->latest()->get();
-        $mouvements_ent = StockMouvement::where('type', 'entree')->limit(3)->latest()->get();
-        $mouvements_sor = StockMouvement::where('type', 'sortie')->limit(3)->latest()->get();
+        /* Changement de mois */ 
+        $mois = $request->mois ?? now()->month;
+        $annee = $request->annee ?? now()->year;
 
-        $clients = Client::limit(3)->latest()->get();
+        $produits = Produit::with('fournisseur')->limit(5)->latest()->get();
+
         $ventes = Vente::with('client')->limit(3)->latest()->get();
 
-        return view('dashboard.index', compact('produits','fournisseurs','mouvements_ent','mouvements_sor','clients','ventes','entreprise')); 
+        /* 1️⃣ Commandes par mois */
+        $commandesParJour = Vente::selectRaw('DAY(created_at) jour, COUNT(*) total')->whereMonth('created_at', $mois)->whereYear('created_at', $annee)->groupBy('jour')->orderBy('jour')->get();
+
+        $commandesMoisLabels = $commandesParJour->pluck('jour');
+        $commandesMoisData = $commandesParJour->pluck('total');
+
+        return view('dashboard.index', compact('commandesMoisLabels','commandesMoisData','produits','ventes','entreprise','mois','annee')); 
     }
 
     // Comptabilite
     public function comptabilite()
     {
-        return view('dashboard.comptabilite');
+        $entreprise = request()->user()->entreprise;
+
+        /* Changement de mois */ 
+        $mois = $request->mois ?? now()->month;
+        $annee = $request->annee ?? now()->year;
+
+
+        /* 1️⃣ Commandes par mois */
+        $commandesParJour = Vente::selectRaw('DAY(created_at) jour, COUNT(*) total')->whereMonth('created_at', $mois)->whereYear('created_at', $annee)->groupBy('jour')->orderBy('jour')->get();
+
+        $commandesMoisLabels = $commandesParJour->pluck('jour');
+        $commandesMoisData = $commandesParJour->pluck('total');
+
+               /* 3️⃣ Top produits du mois */
+        $topProduits = VenteItem::selectRaw('produit_id, SUM(quantite) as total')->whereMonth('created_at', $mois)->whereYear('created_at', $annee)->groupBy('produit_id')->orderByDesc('total')->with('produit:id,nom')->limit(5)->get();
+
+        $topProduitsLabels = $topProduits->pluck('produit.nom');
+        $topProduitsData = $topProduits->pluck('total');
+
+        return view('dashboard.comptabilite', compact('commandesMoisLabels','commandesMoisData','topProduitsData','topProduitsLabels'));
     }
 
 
     // Calcule des rapport
-    public function rapport(Request $request)
+    public function rapports(Request $request)
     {
 
         $entreprise = request()->user()->entreprise;
@@ -85,29 +108,33 @@ class DashboardController extends Controller
     }
 
 
-    // Changement de mois
-    public function stats(Request $request)
+
+    public function rapport()
     {
-        $mois = $request->month;
-        $annee = $request->year;
+        $entreprise = request()->user()->entreprise;
 
-        /* 1️⃣ Commandes par jour du mois */
-        $commandes = Vente::selectRaw('DAY(created_at) jour, COUNT(*) total')->whereMonth('created_at', $mois)->whereYear('created_at', $annee)->groupBy('jour')->orderBy('jour')->get();
+        $recettes = Vente::selectRaw('MONTH(created_at) as mois, COUNT(*) total')->whereYear('created_at', now()->year)->groupBy('mois')->pluck('total','mois');
 
+        $depenses = Depense::selectRaw('MONTH(created_at) as mois, SUM(montant) as total')->whereYear('created_at', now()->year)->groupBy('mois')->pluck('total','mois');
 
-        /* 2️⃣ Chiffre d'affaires */
-        $ca = Recette::whereMonth('created_at', $mois)->whereYear('created_at', $annee)->sum('montant');
+        $labels = [];
+        $dataRecettes = [];
+        $dataDepenses = [];
+        $dataBenefices = [];
 
+        for ($i = 1; $i <= 12; $i++) {
 
-        /* 3️⃣ Top produits */
-        $produits = VenteItem::selectRaw('produit_id, SUM(quantite) total')->whereMonth('created_at', $mois)->whereYear('created_at', $annee)->groupBy('produit_id')->with('produit:id,nom')->orderByDesc('total')->limit(5)->get();
+            $labels[] = Carbon::create()->month($i)->translatedFormat('F');
 
+            $r = $recettes[$i] ?? 0;
+            $d = $depenses[$i] ?? 0;
 
-        /* 4️⃣ Statut commandes */
-        $statuts = Vente::selectRaw('statut, COUNT(*) total')->whereMonth('created_at', $mois)->whereYear('created_at', $annee)->groupBy('statut')->get();
+            $dataRecettes[] = $r;
+            $dataDepenses[] = $d;
+            $dataBenefices[] = $r - $d;
+        }
 
-        return response()->json(['commandes' => $commandes,'ca' => $ca,'produits' => $produits,'statuts' => $statuts,]);
+        return view('rapport', compact('labels','dataRecettes','dataDepenses','dataBenefices'));
     }
-
     
 }

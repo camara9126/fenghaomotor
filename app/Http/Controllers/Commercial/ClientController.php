@@ -22,7 +22,7 @@ class ClientController extends Controller
         return view('commercial.clients.index', compact('clients'));
     }
 
-    public function serach(Request $request)
+    public function search(Request $request)
     {
         $search = $request->query('search');
 

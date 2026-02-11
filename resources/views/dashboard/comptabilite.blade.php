@@ -609,7 +609,7 @@
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end">
                         <li><a class="dropdown-item" href="{{ route('profile.edit') }}"><i class="fas fa-user me-2"></i> Mon profil</a></li>
-                        <li><a class="dropdown-item" href="#"><i class="fas fa-tools me-2"></i> Parametre</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i> Parametre</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li>
                             <form method="POST" action="{{ route('logout') }}">
@@ -641,63 +641,6 @@
                 <div class="row">
 
                     <!-- Dashboard -->
-                    <section class="dashboard">
-                        <div class="dashboard-card">
-                            <div class="card-header">
-                                <h3 class="card-title">Total Recettes</h3>
-                                <div class="card-icon icon-income">
-                                    <i class="fas fa-arrow-up"></i>
-                                </div>
-                            </div>
-                            <div class="card-value">€ 124,850.00</div>
-                            <div class="card-trend trend-up">
-                                <i class="fas fa-arrow-up"></i>
-                                <span>+12% vs mois précédent</span>
-                            </div>
-                        </div>
-                        
-                        <div class="dashboard-card">
-                            <div class="card-header">
-                                <h3 class="card-title">Total Dépenses</h3>
-                                <div class="card-icon icon-expense">
-                                    <i class="fas fa-arrow-down"></i>
-                                </div>
-                            </div>
-                            <div class="card-value">€ 78,430.00</div>
-                            <div class="card-trend trend-down">
-                                <i class="fas fa-arrow-down"></i>
-                                <span>-5% vs mois précédent</span>
-                            </div>
-                        </div>
-                        
-                        <div class="dashboard-card">
-                            <div class="card-header">
-                                <h3 class="card-title">Résultat Net</h3>
-                                <div class="card-icon icon-profit">
-                                    <i class="fas fa-chart-line"></i>
-                                </div>
-                            </div>
-                            <div class="card-value positive">€ 46,420.00</div>
-                            <div class="card-trend trend-up">
-                                <i class="fas fa-arrow-up"></i>
-                                <span>Bénéfice ce mois</span>
-                            </div>
-                        </div>
-                        
-                        <div class="dashboard-card">
-                            <div class="card-header">
-                                <h3 class="card-title">Trésorerie Actuelle</h3>
-                                <div class="card-icon icon-cash">
-                                    <i class="fas fa-wallet"></i>
-                                </div>
-                            </div>
-                            <div class="card-value">€ 89,250.00</div>
-                            <div class="card-trend trend-up">
-                                <i class="fas fa-arrow-up"></i>
-                                <span>Solde disponible</span>
-                            </div>
-                        </div>
-                    </section>
 
                     <!-- Charts Section -->
                     <section class="charts-section">
@@ -1014,44 +957,6 @@
                         </div>
                     </section>
 
-                    <!-- Quick Actions -->
-                    <section class="quick-actions">
-                        <h3 style="font-size: 24px; color: var(--primary-color); margin-bottom: 20px;">Actions Rapides</h3>
-                        <div class="actions-grid">
-                            <div class="action-card">
-                                <div class="action-icon export">
-                                    <i class="fas fa-file-export"></i>
-                                </div>
-                                <h4>Exporter Comptabilité</h4>
-                                <p>Exportez vos données au format Excel, PDF ou FEC</p>
-                            </div>
-                            
-                            <div class="action-card">
-                                <div class="action-icon report">
-                                    <i class="fas fa-chart-bar"></i>
-                                </div>
-                                <h4>Rapport Financier</h4>
-                                <p>Générez un rapport détaillé de votre situation financière</p>
-                            </div>
-                            
-                            <div class="action-card">
-                                <div class="action-icon tax">
-                                    <i class="fas fa-balance-scale"></i>
-                                </div>
-                                <h4>Prévision Fiscale</h4>
-                                <p>Calculez vos prochaines obligations fiscales</p>
-                            </div>
-                            
-                            <div class="action-card">
-                                <div class="action-icon reconcile">
-                                    <i class="fas fa-exchange-alt"></i>
-                                </div>
-                                <h4>Réconciliation Bancaire</h4>
-                                <p>Rapprochez vos transactions avec votre compte bancaire</p>
-                            </div>
-                        </div>
-                    </section>
-                    
                 </div>
 
 <!-- Footer -->
@@ -1073,11 +978,7 @@
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
     <script>
-        // Initialisation de Flatpickr pour les sélecteurs de date
-        flatpickr(".datepicker", {
-            dateFormat: "d/m/Y",
-            locale: "fr"
-        });
+       
         
         // Gestion des onglets de l'historique
         document.querySelectorAll('.tab').forEach(tab => {
@@ -1107,49 +1008,6 @@
             });
         });
         
-        // Simulation de données pour les cartes de dashboard
-        function updateDashboardValues() {
-            // Cette fonction pourrait être utilisée pour actualiser les valeurs
-            // depuis une API ou une source de données
-            const cards = document.querySelectorAll('.dashboard-card');
-            cards.forEach(card => {
-                // Ajouter une animation subtile
-                card.style.transform = 'translateY(-5px)';
-                setTimeout(() => {
-                    card.style.transform = 'translateY(0)';
-                }, 300);
-            });
-        }
-        
-        // Gestion des actions rapides
-        document.querySelectorAll('.action-card').forEach(card => {
-            card.addEventListener('click', () => {
-                const title = card.querySelector('h4').textContent;
-                alert(`Action "${title}" déclenchée. Dans une implémentation réelle, cela ouvrirait la fonctionnalité correspondante.`);
-            });
-        });
-        
-        // Exemple de fonction pour exporter les données
-        function exportAccountingData(format) {
-            alert(`Export des données comptables au format ${format} en cours...`);
-            // Ici, vous implémenteriez la logique d'export réelle
-        }
-        
-        // Exemple de fonction pour générer un rapport
-        function generateFinancialReport() {
-            alert('Génération du rapport financier...');
-            // Logique de génération de rapport
-        }
-        
-        // Initialisation
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('Module Comptabilité Fenghao Motor SN chargé');
-            
-            // Simuler un chargement de données
-            setTimeout(() => {
-                updateDashboardValues();
-            }, 1000);
-        });
     </script>
 
     <!-- Bootstrap JS -->
