@@ -86,14 +86,14 @@ class VenteController extends Controller
 
             // Alert stock minimum depasse
             if ($produit->stock <= $produit->stock_min) {
-                return redirect()->back()->with('danger','Votre stock minimum est depasse');
+                return redirect()->back()->with('danger','Vous avez atteint le stock minimum');
             }
 
 
             // Verification quantite de stock
             if ($produit->stock < $item['quantite']) {
                 
-                return redirect()->back()->with('danger','Stock insuffisant pour le produit : {$produit->nom}');
+                return redirect()->back()->with('danger','Quantite de Stock insuffisant pour ce produit : {$produit->nom}');
             }
 
             //dd($request->all());

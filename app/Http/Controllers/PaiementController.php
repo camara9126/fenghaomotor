@@ -61,7 +61,7 @@ class PaiementController extends Controller
 
         
         $totalPaye = $vente->paiements()->where('statut','valide')->sum('montant');
-        $reste = $vente->total_ttc - $totalPaye;
+        $reste = $vente->total - $totalPaye;
 
         if ($request->montant > $reste) {
             return back()->withErrors([
@@ -84,7 +84,7 @@ class PaiementController extends Controller
 
         $totalPaye = $vente->paiements()->where('statut','valide')->sum('montant');
 
-        $vente->statut = $totalPaye == 0 ? 'impayee' : ($totalPaye < $vente->total_ttc ? 'partielle' : 'payee');
+        $vente->statut = $totalPaye == 0 ? 'impayee' : ($totalPaye < $vente->total ? 'partielle' : 'payee');
 
         $vente->save();
 
@@ -108,11 +108,6 @@ class PaiementController extends Controller
     // Anuuler paiement daja valide
     public function annuler(Request $request, $id)
     {
-        
-        // Sécurité rôle
-        if ($request->user()->role !='administrateur' && $request->user()->role !='comptable') {
-            abort(403);
-        }
 
         $paiement = Paiements::findOrFail($id);
         
@@ -136,7 +131,7 @@ class PaiementController extends Controller
         // Recalcul statut vente
         $totalPaye = $vente->paiements()->where('statut', 'valide')->sum('montant');
 
-        $vente->statut = $totalPaye == 0 ? 'impayee' : ($totalPaye < $vente->total_ttc ? 'partielle' : 'payee');
+        $vente->statut = $totalPaye == 0 ? 'impayee' : ($totalPaye < $vente->totat ? 'partielle' : 'payee');
 
         $vente->save();
 

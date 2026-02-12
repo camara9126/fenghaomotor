@@ -4,8 +4,10 @@
         <div class="container-fluid p-3 p-md-4" id="contentArea">
             <!-- Dashboard Section -->
             <section id="dashboard" class="content-section">
+
                 <!-- Stats Row -->
                  @include('partials.data')
+
                  <!-- Charts Row -->
                   @if(Session::has('success'))
                         <div class="alert alert-success" role="alert">
@@ -104,7 +106,6 @@
                 </div>
                 
             </section>
-        </div>
         
          <!-- Footer -->
         <footer class="footer">

@@ -65,9 +65,6 @@
                                         <div class="col-6">
                                             <h4>Produits</h4>
                                         </div>
-                                        <div class="col-6">
-                                            <b>TVA ({{$entreprise->taux_tva}} %)</b>
-                                        </div>
                                     </div>
 
                                     <table border="1" cellpadding="8" width="100%">

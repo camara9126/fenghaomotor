@@ -22,9 +22,11 @@
 
                         <!-- Section Produits -->
                         <h3 class="mb-0">Depenses</h3>
-                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#depenseModal">
-                            Enregister
-                        </button>
+                        @can('gerer-ventes')
+                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#depenseModal">
+                                Enregister
+                            </button>
+                        @endcan
                         </div>
                         <div class="stat-card">        
                             <div class="card shadow-sm">
@@ -130,9 +132,9 @@
                                                     <select name="mode_paiement" class="form-control" required>
                                                         <option value="">-- Choisir --</option>
                                                         <option value="cash">Cash</option>
-                                                        <option value="mobile_money">Mobile Money</option>
-                                                        <option value="virement">Virement</option>
-                                                        <option value="cheque">Chèque</option>
+                                                        <option value="orange_money">Orange Money</option>
+                                                        <option value="wave">Virement</option>
+                                                        <option value="banque">Banque</option>
                                                     </select>
                                                 </div>
 

@@ -67,17 +67,19 @@
                                                     <td>{{max(0, number_format($p->montant, 0, ',',' '))}} XOF</td>
                                                     <td>{{$p->date_paiement}}</td>
                                                     <td>{{$p->mode_paiement}}</td>
-                                                    <td>
-                                                        @if($p->statut === 'valide')
-                                                            <form action="{{ route('paiements.annuler', $p->id) }}" method="POST" onsubmit="return confirm('Confirmer l’annulation du paiement ?')">
-                                                                @csrf
-                                                                @method('PUT')
-                                                                <button class="btn btn-outline-danger btn-sm">
-                                                                    Annuler le paiement
-                                                                </button>
-                                                            </form>
-                                                        @endif                                    
-                                                    </td>                                                        
+                                                    @can('gerer-ventes')
+                                                        <td>
+                                                            @if($p->statut === 'valide')
+                                                                <form action="{{ route('paiements.annuler', $p->id) }}" method="POST" onsubmit="return confirm('Confirmer l’annulation du paiement ?')">
+                                                                    @csrf
+                                                                    @method('PUT')
+                                                                    <button class="btn btn-outline-danger btn-sm">
+                                                                        Annuler le paiement
+                                                                    </button>
+                                                                </form>
+                                                            @endif                                    
+                                                        </td> 
+                                                    @endcan                                                       
                                                 </tr>
                                                 @empty
                                                     <tr>

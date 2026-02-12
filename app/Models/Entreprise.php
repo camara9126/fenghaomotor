@@ -29,9 +29,9 @@ class Entreprise extends Model
     }
 
 
-    public function produit()
+    public function produits()
     {
-        return $this->belongsTo(Produit::class);
+        return $this->hasMany(Produit::class,'fournisseur_id');
     }
 
     public function client()
@@ -64,30 +64,7 @@ class Entreprise extends Model
         'resultat',
         'statut_solvabilite',
     ];
-
-    // Total recettes encaisse
-    public function getTotalRecettesAttribute()
-    {
-        return $this->recettes()->whereMonth('created_at', now()->month)->whereYear('created_at', now()->year)->where('statut','recu')->sum('montant');
-    }
-
-    // Total depense 
-    public function getTotalDepensesAttribute()
-    {
-        return $this->depenses()->whereMonth('created_at', now()->month)->whereYear('created_at', now()->year)->sum('montant');
-    }
-
-    // Tresorerie nette
-    public function getTresorerieAttribute()
-    {
-        return $this->total_recettes - $this->total_depenses;
-    }
-
-    // Resultat (benefice/perte)
-     public function getResultatAttribute()
-    {
-        return $this->total_recettes - $this->total_depenses;
-    }
+ 
 
     // Statut solvabilite
     public function getStatutSolvabiliteAttribute()

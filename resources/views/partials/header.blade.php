@@ -1,6 +1,10 @@
 <?php
 
+use App\Models\Produit;
+
     $entreprise = request()->user()->entreprise;
+    // Alert sotck
+    $alerte = Produit::produitsEnAlerte()->count();
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -41,6 +45,7 @@
     
     <!-- Main Content -->
     <div class="main-content" id="mainContent">
+
         <!-- Top Bar -->
         <div class="top-bar d-flex justify-content-between align-items-center">
             <div class="d-flex align-items-center">
@@ -53,7 +58,11 @@
             <div class="d-flex align-items-center">
                 <!-- Search Bar - Hidden on mobile -->
                 <div class="d-none d-md-block me-3">
-
+                    @if($alerte)
+                        <div class="alert alert-danger">
+                            ⛔ Vous avez <b><?= $alerte ?></b> produit(s) en rupture de stock. Merci de mettre a jour !
+                        </div>
+                    @endif
                 </div>
                 
                 <!-- Notifications -->
@@ -66,10 +75,12 @@
                         </span>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end">
-                        <li><h6 class="dropdown-header">Notifications</h6></li>
-                        
-                        <li><a class="dropdown-item" href="#">Paiement reçu de Client XYZ</a></li>
-                         
+                        <!--<li><h6 class="dropdown-header">Notifications</h6></li>-->
+                        @if($alerte)
+                            <li>
+                                <a class="dropdown-item alert alert-info" href="{{ route('mouvements') }}">⛔ <b><?= $alerte ?></b> produit(s) est en rupture de stock.</a>
+                            </li>
+                        @endif
                     </ul>
                     
                 </div>

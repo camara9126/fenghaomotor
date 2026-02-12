@@ -1,5 +1,5 @@
 <div class="sidebar" id="sidebar">
-        <div class="sidebar-header">
+        <div class="sidebar-header mb-0">
                
             <img src="{{ asset('asset/logo/logo bas.png') }}" alt="Logo entreprise" class="w-100">
             <small class="text-white">{{ Auth::user()->entreprise->adresse }}</small>
@@ -63,12 +63,12 @@
                         <i class="fas fa-chart-bar"></i> Rapports
                     </a>
                 </li>
-                @can('gerer-ventes')
-                <li class="nav-item mb-0 mt-0">
+                @can('admin')
+                <!--<li class="nav-item mb-0 mt-0">
                     <a href="{{ route('dashboard.comptabilite') }}" class="nav-link" data-section="reports">
                         <i class="fas fa-chart-bar"></i> Comptabilite
                     </a>
-                </li>
+                </li>-->
                     <li class="nav-item">
                         <a href="{{ route('user.compte') }}" class="nav-link" data-section="settings">
                             <i class="fas fa-user"></i> Utilisateurs

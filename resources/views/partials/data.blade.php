@@ -11,8 +11,7 @@
 
     //Chiffre d'affaire HT + montant TVA
     $entreprise = request()->user()->entreprise;
-    $montant_tva = $caMoisActuel * ($entreprise->taux_tva / 100) /(1 + ($entreprise->taux_tva / 100));
-    $ca_ht = $caMoisActuel - $montant_tva;
+    $ca_ht = $caMoisActuel;
 
     // chiffre d'affaire mois precedent
     $caMoisPrecedent = Recette::where('statut', 'recu')->whereMonth('created_at', now()->submonth()->month)->whereYear('created_at', now()->subMonth()->year)->sum('montant');
@@ -52,14 +51,12 @@
 
 ?>
 
-
-
  <div class="row g-3 mb-4">
     <div class="col-xl-3 col-lg-6 col-md-6">
         <div class="stat-card">
             <div class="d-flex justify-content-between align-items-center">
                 <div>
-                    <p class="text-muted mb-1">Chiffre d'affaires (HT)</p>
+                    <p class="text-muted mb-1">Chiffre d'affaires </p>
                     <h3 class="value fw-bold">{{ number_format($ca_ht, 0, ',', ' ') }} XOF</h3>
                     
                         @if($tauxCommandes > 15)
@@ -71,7 +68,6 @@
                             <i class="fas fa-arrow-down me-1"></i> {{number_format(abs($tauxCommandes), 1)}}% vs mois dernier
                         </small>
                         @endif
-                    <p class="mt-1 mb-0">Montant TVA : <span class="value fw-bold">{{number_format($montant_tva, 0, ',', ' ')}} XOF</span></p>
 
                 </div>
                 <div class="icon bg-primary bg-opacity-10 text-primary">

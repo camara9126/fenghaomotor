@@ -69,7 +69,7 @@
             <th>Produit</th>
             <th>Quantité</th>
             <th>Prix unitaire (XOF)</th>
-            <th>TVA</th>
+            <!--<th>TVA</th>-->
         </tr>
     </thead>
     <tbody>
@@ -78,7 +78,7 @@
             <td>{{ $item->produit->nom }}</td>
             <td>{{ $item->quantite }}</td>
             <td>{{ number_format($item->prix_unitaire, 0, ',', ' ') }}</td>
-            <td>{{$item->taux_tva}} %</td>
+            <!--<td>{{$item->taux_tva}} %</td>-->
         </tr>
         @endforeach
     </tbody>
@@ -86,18 +86,14 @@
 
 <br>
     
-<h4>TVA ({{$item->taux_tva}} %) : {{ number_format($item->montant_tva) }} XOF</h4>
-
-<h3>Sous-Total : {{ number_format($item->total, 0, ',', ' ') }} XOF</h3>
-
-<h2 style="color: red;">Total-TVA : {{ number_format($item->total_ttc, 0, ',', ' ') }} XOF</h2>
+<h2 style="color: red;">Total : {{ number_format($item->total, 0, ',', ' ') }} XOF</h2>
 
         <!-- Pied de page -->
         <div class="invoice-footer">
-            <!--<div class="footer-left">
-                <div>Solutions Pro - SAS au capital de 50 000 €</div>
-                <div>RCS Paris 123 456 789 - TVA intracommunautaire FR 12 123456789</div>
-            </div>-->
+            <div class="footer-left">
+                <div>{{$entreprise->nom}}</div>
+                <div>{{$entreprise->adresse}}</div>
+            </div>
             <div class="footer-right">
                 <div class="status-paid">FACTURE PAYÉE</div>
                 <div style="margin-top: 10px; font-size: 12px;">Date de paiement: <?= date('d-m-Y'); ?></div>

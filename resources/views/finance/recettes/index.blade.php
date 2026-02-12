@@ -22,9 +22,11 @@
 
                         <!-- Section Produits -->
                         <h3 class="mb-0">Recettes</h3>
-                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#depenseModal">
-                            Enregister
-                        </button>
+                        @can('gerer-ventes')
+                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#depenseModal">
+                                Enregister
+                            </button>
+                        @endcan
                         </div>
                         <div class="stat-card">        
                             <div class="card shadow-sm">

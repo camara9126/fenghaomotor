@@ -16,6 +16,6 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define('gerer-stock', [PermissionPolicy::class, 'gererStock']);
         Gate::define('gerer-ventes', [PermissionPolicy::class, 'gererVentes']);
-        Gate::define('admin', fn($user) => $user->role === 'admin');
+        Gate::define('admin', [PermissionPolicy::class, 'administrateur']);
     }
 }

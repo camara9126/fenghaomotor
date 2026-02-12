@@ -48,7 +48,7 @@ class Vente extends Model
     // calcule montant restant
     public function getMontantRestantAttribute()
     {
-        return max(0, $this->total_ttc - $this->montant_paye);
+        return max(0, $this->total - $this->montant_paye);
     }
 }
 
