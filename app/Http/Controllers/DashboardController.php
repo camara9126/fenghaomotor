@@ -68,6 +68,7 @@ class DashboardController extends Controller
     public function rapport(Request $request)
     {
         $entreprise = request()->user()->entreprise;
+        $alerte = Produit::produitsEnAlerte()->count();
 
         /* Changement de mois */ 
         $mois = $request->mois ?? now()->month;
@@ -161,15 +162,23 @@ class DashboardController extends Controller
                 'profits' => $yearProfit,
             ];
 
-            // Top produit
-            $topProduits = DB::table('vente_items')->join('produits', 'vente_items.produit_id', '=', 'produits.id')->select('produits.nom as produit',
-                        DB::raw('SUM(vente_items.quantite * vente_items.prix_unitaire) as total')
-                    )->whereYear('vente_items.created_at', now()->year)->groupBy('produits.nom')->orderByDesc('total')->limit(10)->get();
 
-                $categories = $topProduits->pluck('produit');
-                $amounts = $topProduits->pluck('total');
+            // Top produit mois
+            $monthTopProduits = DB::table('vente_items')->join('produits', 'vente_items.produit_id', '=', 'produits.id')->select('produits.nom as produit',
+                        DB::raw('SUM(vente_items.quantite * vente_items.prix_unitaire) as total'))->whereMonth('vente_items.created_at', now()->month)->groupBy('produits.nom')->orderByDesc('total')->limit(10)->get();
 
-            return view('dashboard.rapport', compact('monthlyData','quarterlyData','yearlyData','categories', 'amounts'));
+                $categories = $monthTopProduits->pluck('produit');
+                $amounts = $monthTopProduits->pluck('total');
+
+                
+            // Top produit annee
+            $yearTopProduits = DB::table('vente_items')->join('produits', 'vente_items.produit_id', '=', 'produits.id')->select('produits.nom as produit',
+                        DB::raw('SUM(vente_items.quantite * vente_items.prix_unitaire) as total'))->whereYear('vente_items.created_at', now()->year)->groupBy('produits.nom')->orderByDesc('total')->limit(10)->get();
+
+                $yearCategories = $yearTopProduits->pluck('produit');
+                $yearAmounts = $yearTopProduits->pluck('total');
+
+            return view('dashboard.rapport', compact('alerte','monthlyData','quarterlyData','yearlyData','categories', 'amounts','yearAmounts','yearCategories'));
     }
 
     

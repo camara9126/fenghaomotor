@@ -30,12 +30,12 @@ class Produit extends Model
         return $this->belongsTo(Entreprise::class);
     }
 
-         // Rendre les indicateurs accessibles partout
+    // Rendre les indicateurs accessibles partout
     protected $appends = [
         'stock',
         'stock_min'
     ];
-    
+
         // Alerte stock minimum
     public static function produitsEnAlerte()
     {

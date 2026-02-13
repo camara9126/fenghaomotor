@@ -1,10 +1,8 @@
 <?php
 
-use App\Models\Produit;
 
     $entreprise = request()->user()->entreprise;
-    // Alerte stock
-     $alerte = Produit::produitsEnAlerte()->count();
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -443,8 +441,8 @@ use App\Models\Produit;
                             </div>
                             <div class="card-value" id="total-revenus">XOF 124,850.00</div>
                             <div class="card-trend trend-up">
-                                <i class="fas fa-arrow-up"></i>
-                                <span id="revenus-trend">+12% vs mois précédent</span>
+                                <!--<i class="fas fa-arrow-up"></i>
+                                <span id="revenus-trend">+12% vs mois précédent</span>-->
                             </div>
                         </div>
                         
@@ -457,8 +455,8 @@ use App\Models\Produit;
                             </div>
                             <div class="card-value" id="total-depenses">XOF 78,430.00</div>
                             <div class="card-trend trend-down">
-                                <i class="fas fa-arrow-down"></i>
-                                <span id="depenses-trend">-5% vs mois précédent</span>
+                                <!--<i class="fas fa-arrow-down"></i>
+                                <span id="depenses-trend">-5% vs mois précédent</span>-->
                             </div>
                         </div>
                         
@@ -511,7 +509,7 @@ use App\Models\Produit;
                         <!-- Graphique 2: Répartition des Dépenses -->
                         <div class="chart-card">
                             <div class="chart-header">
-                                <h3 class="chart-title">Répartition des Dépenses</h3>
+                                <h3 class="chart-title">Répartition des Top Produits</h3>
                                 <div class="period-selector" id="period-selector-2">
                                     <button class="period-btn active" data-period="mois">Ce mois</button>
                                     <button class="period-btn" data-period="annee">Cette année</button>
@@ -592,9 +590,8 @@ use App\Models\Produit;
         // ============================================
         
         const expensesDistributionMonth = {
-            categories: ['Salaires', 'Loyers', 'Équipement', 'Marketing', 
-                        'Services', 'Formation', 'Déplacements', 'Assurances'],
-            amounts: [28500, 3200, 4800, 2500, 850, 1200, 650, 430],
+            categories: @json($categories),
+            amounts: @json($amounts),
             colors: ['#4caf50', '#2196f3', '#ff9800', '#f44336', 
                      '#9c27b0', '#009688', '#ff5722', '#e91e63']
         };
@@ -604,8 +601,10 @@ use App\Models\Produit;
         // ============================================
         
        const topProduitsYear = {
-            categories: @json($categories),
-            amounts: @json($amounts),
+            categories: @json($yearCategories),
+            amounts: @json($yearAmounts),
+             colors: ['#4caf50', '#2196f3', '#ff9800', '#f44336', 
+                     '#9c27b0', '#009688', '#ff5722', '#e91e63']
         };
 
         // ============================================

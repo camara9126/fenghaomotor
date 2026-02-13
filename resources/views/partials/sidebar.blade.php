@@ -1,14 +1,14 @@
-<div class="sidebar" id="sidebar">
-        <div class="sidebar-header mb-0">
-               
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header mb-0">           
             <img src="{{ asset('asset/logo/logo bas.png') }}" alt="Logo entreprise" class="w-100">
             <small class="text-white">{{ Auth::user()->entreprise->adresse }}</small>
         </div>
-        <div class="px-3 py-4">
+
+        <div class="px-2 py-2 mt-0">
             <ul class="nav flex-column">      
-                <li class="nav-item">
+                <li class="nav-item mb-0 mt-0">
                     <a href="{{ route('dashboard.index') }}" class="nav-link" data-section="dashboard">
-                        <i class="fas fa-home"></i> Dashboard
+                        <i class="fas fa-home"></i> Accueil
                     </a>
                 </li>
                 @can('gerer-stock')
