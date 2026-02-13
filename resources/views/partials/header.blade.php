@@ -94,7 +94,12 @@ use App\Models\Produit;
                 <div class="dropdown">
                     <button class="btn btn-light d-flex align-items-center" type="button" data-bs-toggle="dropdown">
                         <!--<span class="badge bg-success">{{strtoupper(Auth::user()->name[0]) }}</span>-->
-                        <i class="fas fa-user-check text-success me-2"></i>
+                        <!--<i class="fas fa-user-check text-success me-2"></i>-->
+                        <div class="user-info">
+                            <div class="user-avatar">
+                                <img src="{{asset('asset/logo/user.jpg')}}" width="25" class="rounded-circle" alt="">
+                            </div>
+                        </div>
                         <i class="fas fa-chevron-down"></i>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end">
