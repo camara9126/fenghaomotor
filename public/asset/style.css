@@ -1,7 +1,7 @@
         :root {
             --primary-color: #ab0100;
             --secondary-color: #f11615;
-            --success-color: #f5f7fb;
+            --success-color: #4cc9f0;
             --light-color: #f8f9fa;
             --dark-color: #212529;
         }
@@ -14,7 +14,7 @@
             background-color: #f5f7fb;
             overflow-x: hidden;
         }
-        
+
         .user-info {
             display: flex;
             align-items: center;

@@ -133,7 +133,7 @@
                                                         <option value="">-- Choisir --</option>
                                                         <option value="cash">Cash</option>
                                                         <option value="orange_money">Orange Money</option>
-                                                        <option value="wave">Virement</option>
+                                                        <option value="wave">Wave</option>
                                                         <option value="banque">Banque</option>
                                                     </select>
                                                 </div>

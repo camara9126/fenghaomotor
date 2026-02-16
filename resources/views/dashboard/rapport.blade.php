@@ -2,13 +2,13 @@
 
 
     $entreprise = request()->user()->entreprise;
-
 ?>
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Fenghao Motor SN</title>
     
     <!-- Bootstrap 5 CSS -->
@@ -16,92 +16,23 @@
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-     <!-- CSS -->
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
     <link rel="stylesheet" href="{{asset('asset/style.css')}}">
-    
-     <!-- Icon Image -->
+
+    <!-- Icon Image -->
      <link rel="shortcut icon" href="{{asset('asset/logo/logo bas.png')}}"/>
-    
+
     <style>
-        
-        .header-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        
-        .logo-icon {
-            background-color: var(--accent-color);
-            width: 45px;
-            height: 45px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 22px;
-            font-weight: bold;
-        }
-        
-        .logo-text h1 {
-            font-size: 24px;
-            font-weight: 700;
-        }
-        
-        .logo-text span {
-            color: #c5cae9;
-            font-weight: 400;
-            font-size: 14px;
-        }
-        
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 25px;
-        }
-        
-        nav a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
-            padding: 5px 0;
-            position: relative;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        nav a:hover {
-            color: #c5cae9;
-        }
-        
-        nav a.active:after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background-color: var(--accent-color);
-            border-radius: 2px;
-        }
-        
         .user-info {
             display: flex;
             align-items: center;
@@ -118,31 +49,6 @@
             justify-content: center;
             font-weight: bold;
         }
-
-        /* Page Header */
-        .page-header {
-            padding: 30px 0 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .page-header h2 {
-            font-size: 32px;
-            color: var(--primary-color);
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        
-        .page-header h2 i {
-            color: var(--accent-color);
-        }
-        
-        .page-actions {
-            display: flex;
-            gap: 15px;
-        }
         
         .btn {
             padding: 12px 25px;
@@ -154,27 +60,6 @@
             align-items: center;
             gap: 10px;
             transition: all 0.3s ease;
-        }
-        
-        .btn-primary {
-            background-color: var(--secondary-color);
-            color: white;
-        }
-        
-        .btn-primary:hover {
-            background-color: var(--primary-color);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(26, 35, 126, 0.2);
-        }
-        
-        .btn-success {
-            background-color: var(--success-color);
-            color: white;
-        }
-        
-        .btn-success:hover {
-            background-color: #3d8b40;
-            transform: translateY(-2px);
         }
         
         .btn-light {
@@ -337,18 +222,15 @@
             width: 100% !important;
             height: 100% !important;
         }
-        
-        /* Reste des styles identiques */
-        .table-section, .history-section, .quick-actions, footer {
-            /* Garder les mêmes styles que précédemment */
-        }
+
         
         @media (max-width: 992px) {
             .charts-section {
                 grid-template-columns: 1fr;
             }
         }
-    </style>
+    </style>    
+    
 </head>
 <body>
     <!-- Sidebar -->
@@ -359,6 +241,7 @@
     
     <!-- Main Content -->
     <div class="main-content" id="mainContent">
+
         <!-- Top Bar -->
         <div class="top-bar d-flex justify-content-between align-items-center">
             <div class="d-flex align-items-center">
@@ -375,13 +258,14 @@
                         <div class="alert alert-danger">
                             ⛔ Vous avez <b><?= $alerte ?></b> produit(s) en rupture de stock. Merci de mettre a jour !
                         </div>
-                    @endif                   
+                    @endif
                 </div>
                 
                 <!-- Notifications -->
                 <div class="dropdown me-3">
                     <button class="btn btn-light dropdown-toggle" type="button" id="notificationsDropdown" data-bs-toggle="dropdown">
                         <i class="fas fa-bell"></i>
+                        
                         <span class="badge bg-danger rounded-pill">
                             1
                         </span>
@@ -406,7 +290,12 @@
                 <div class="dropdown">
                     <button class="btn btn-light d-flex align-items-center" type="button" data-bs-toggle="dropdown">
                         <!--<span class="badge bg-success">{{strtoupper(Auth::user()->name[0]) }}</span>-->
-                        <i class="fas fa-user-check text-success me-2"></i>
+                        <!--<i class="fas fa-user-check text-success me-2"></i>-->
+                        <div class="user-info">
+                            <div class="user-avatar">
+                                <img src="{{asset('asset/logo/user.jpg')}}" width="25" class="rounded-circle" alt="">
+                            </div>
+                        </div>
                         <i class="fas fa-chevron-down"></i>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end">
@@ -600,11 +489,10 @@
         // DONNÉES DE RÉPARTITION DES DÉPENSES - ANNÉE
         // ============================================
         
-       const topProduitsYear = {
+       const expensesDistributionYear = {
             categories: @json($yearCategories),
             amounts: @json($yearAmounts),
-             colors: ['#4caf50', '#2196f3', '#ff9800', '#f44336', 
-                     '#9c27b0', '#009688', '#ff5722', '#e91e63']
+             
         };
 
         // ============================================
@@ -700,7 +588,7 @@
                             label: 'Bénéfice',
                             data: profitData,
                             borderColor: colors.info,
-                            backgroundColor: '#2196f3',
+                            backgroundColor: 'rgba(33, 150, 243, 0.1)',
                             borderWidth: 2,
                             borderDash: [5, 5],
                             pointBackgroundColor: colors.info,

@@ -1,5 +1,5 @@
 @include('partials.header')
-        
+ 
         <!-- Content Area -->
         <div class="container-fluid p-3 p-md-4" id="contentArea">
             <!-- Dashboard Section -->
@@ -42,11 +42,15 @@
                                 <div class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 py-3">
                                     <div class="d-flex align-items-center">
                                         <div class="bg-primary bg-opacity-10 text-primary rounded p-2 me-3">
-                                            <i class="fas fa-mobile-alt"></i>
+                                            <i class="fa-solid fa-motorcycle"></i>
                                         </div>
                                         <div>
                                             <h6 class="mb-1">{{$p->nom}}</h6>
-                                            <small class="text-muted">Qte Stock: {{$p->stock}}</small>
+                                            @if($alerte)
+                                                <small class="text-red">Stock faible</small>
+                                            @else
+                                                <small class="text-muted">Qte Stock: {{$p->stock}}</small>
+                                            @endif
                                         </div>
                                     </div>
                                     <span class="badge bg-primary rounded-pill">{{number_format($p->prix_vente, 0, ',',' ')}} XOF</span>

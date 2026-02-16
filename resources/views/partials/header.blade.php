@@ -1,13 +1,13 @@
 <?php
 
-use App\Models\Produit;
+    use App\Models\Produit;
 
     $entreprise = request()->user()->entreprise;
     // Alert sotck
     $alerte = Produit::produitsEnAlerte()->count();
 ?>
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

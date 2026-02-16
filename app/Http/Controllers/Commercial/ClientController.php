@@ -26,7 +26,7 @@ class ClientController extends Controller
     {
         $search = $request->query('search');
 
-        $clients = Client::all()->when($search, function ($query, $search) {
+        $clients = Client::when($search, function ($query, $search) {
 
                 $query->where('nom', 'like', "%{$search}%");
 
