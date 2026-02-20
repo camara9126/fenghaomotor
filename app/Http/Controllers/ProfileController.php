@@ -87,6 +87,7 @@ class ProfileController extends Controller
             'taux_tva' => 'numeric|max:100',
             'adresse' => 'nullable|string',
             'logo',
+            'tva',
         ]);
 
         // Gestion des logo
@@ -101,6 +102,7 @@ class ProfileController extends Controller
             'taux_tva' => $request->taux_tva,
             'adresse' => $request->adresse,
             'logo' => $path  ?? null,
+            'taux_tva' => 18,
         ]);
 
         return redirect()->back()->with('success', 'Entreprise mise a jour avec success');
