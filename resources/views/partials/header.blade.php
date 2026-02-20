@@ -97,7 +97,7 @@
                         <!--<i class="fas fa-user-check text-success me-2"></i>-->
                         <div class="user-info">
                             <div class="user-avatar">
-                                <img src="{{asset('asset/logo/user.jpg')}}" width="25" class="rounded-circle" alt="">
+                                <img src="{{asset('asset/logo/user.png')}}" width="25" class="rounded-circle" alt="">
                             </div>
                         </div>
                         <i class="fas fa-chevron-down"></i>
