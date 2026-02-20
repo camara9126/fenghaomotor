@@ -33,6 +33,7 @@ class ProfileController extends Controller
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'role' => ['string', 'max:250'],
+            
         ]);
         //dd($request);
         User::create([
@@ -40,6 +41,7 @@ class ProfileController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'role' => $request->role ?? 'admin',
+            'entreprise_id' => 1
         ]);
 
         return redirect()->route('user.adduser')->with('success', 'Utilisateur ajouté avec succès');

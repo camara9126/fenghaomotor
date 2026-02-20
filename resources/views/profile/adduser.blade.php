@@ -50,8 +50,8 @@
                                         <div class="mb-3">
                                             <label for="role" class="form-label">Role</label>
                                             <select class="form-select" name="role" id="role" required>
-                                                <option value="admin">Administrateur</option>
-                                                <option value="gestionnaire  de stock">Gestionnaire de stock</option>
+                                                <option value="administrateur">Administrateur</option>
+                                                <option value="gestionnaire de stock">Gestionnaire de stock</option>
                                                 <option value="caissier">Caissier</option>
                                             </select> 
                                         </div>
