@@ -7,7 +7,7 @@
             <section id="dashboard" class="content-section">
                 <!-- Stats Row -->
                 
-                <!-- Recent Orders -->>
+                <!-- Recent Orders -->
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             @if(Session::has('success'))
                                 <div class="alert alert-success" role="alert">
@@ -19,10 +19,8 @@
                                 </div>
                             @endif
                         <!-- Section Produits -->
-                        <h3 class="mb-0">Clients</h3>
-                        <a href="{{route('clients.create')}}" class="btn btn-success">
-                            <i class="fas fa-plus me-1"></i> Nouveau client
-                        </a>
+                        <h3 class="mb-0">Parametre</h3>
+                        
                         </div>
                             <div class="card col-md-10 shadow-sm">
                                 <div class="card-body">
