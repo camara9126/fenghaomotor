@@ -113,8 +113,13 @@ class ProduitController extends Controller
     public function destroy(Request $request, Produit $produit)
     {
 
-        $produit->update(['statut' => false]);
+        if($produit->statut == true) {
+             $produit->update(['statut' => false]);
 
+             return redirect()->route('produits.index')->with('success', 'Produit désactivé');
+        } else
+            $produit->update(['statut' => true]);
+            
         return redirect()->route('produits.index')->with('success', 'Produit désactivé');
     }
 

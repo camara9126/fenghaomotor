@@ -264,11 +264,12 @@
                 <!-- Notifications -->
                 <div class="dropdown me-3">
                     <button class="btn btn-light dropdown-toggle" type="button" id="notificationsDropdown" data-bs-toggle="dropdown">
-                        <i class="fas fa-bell"></i>
-                        
-                        <span class="badge bg-danger rounded-pill">
-                            1
-                        </span>
+                        <i class="fas fa-bell"></i>     
+                        @if($alerte)
+                            <span class="badge bg-danger rounded-pill">
+                                1   
+                            </span>
+                        @endif
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end">
                         <!--<li><h6 class="dropdown-header">Notifications</h6></li>-->
@@ -299,13 +300,13 @@
                         <i class="fas fa-chevron-down"></i>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" href="{{ route('profile.edit') }}"><i class="fas fa-user me-2"></i> Mon profil</a></li>
-                        <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i> Parametre</a></li>
+                        <li><a class="dropdown-item" href="{{ route('profile.edit') }}"><i class="fas fa-user me-2 text-primary"></i> Mon profil</a></li>
+                        <li><a class="dropdown-item" href="{{ route('parametre') }}"><i class="fas fa-cog me-2 text-primary"></i> Parametre</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li>
                             <form method="POST" action="{{ route('logout') }}">
                                         @csrf    
-                                <a class="dropdown-item" href="{{route('logout')}}"onclick="event.preventDefault(); this.closest('form').submit();"><i class="fas fa-sign-out-alt me-2"></i> Déconnexion</a>
+                                <a class="dropdown-item" href="{{route('logout')}}"onclick="event.preventDefault(); this.closest('form').submit();"><i class="fas fa-sign-out-alt me-2 text-danger"></i> Déconnexion</a>
                             </form>
                         </li>
                     </ul>
@@ -409,7 +410,6 @@
                             </div>
                         </div>
                     </section>
-     
             </section>
             
         </div>
@@ -429,6 +429,7 @@
             </div>
         </footer>
     </div>
+
 
 
     <script>

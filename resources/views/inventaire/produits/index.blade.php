@@ -43,6 +43,7 @@
                                                 <th>Prix d'achat</th>
                                                 <th>Prix de vente</th>
                                                 <th>Stock</th>
+                                                <th>Statut</th>
                                                 <th>Actions</th>
                                             </tr>
                                         </thead>
@@ -61,10 +62,40 @@
                                                         {{$p->stock}}
                                                     @endif
                                                 </td>
+                                                <th>
+                                                     @if($p->statut)
+                                                        <span class="badge bg-success">Actif</span>
+                                                    @else
+                                                        <span class="badge bg-danger">Inactif</span>
+                                                    @endif
+                                                </th>
                                                 <td>
-                                                    <a href="{{route('produits.edit', $p->id)}}">
-                                                        <i class="fa fa-eye text-primary"></i>
-                                                    </a>
+                                                    <div class="row">
+                                                        <div class="col-4">
+                                                            <a href="{{route('produits.edit', $p->id)}}">
+                                                                <i class="fa fa-eye text-primary"></i>
+                                                            </a>
+                                                        </div>
+                                                        <div class="col-4">
+                                                             @if($p->statut)
+                                                                <form action="{{route('produits.destroy', $p->id)}}" type="button" method="post" onsubmit="return confirm('Desactiver ?')">
+                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                    <button type="submit" class="btn btn-outline-danger" title="desactiver">
+                                                                        <i class="fa fa-times" aria-hidden="true"></i>
+                                                                    </button>
+                                                                </form>
+                                                             @else
+                                                                <form action="{{route('produits.destroy', $p->id)}}" type="button" method="post" onsubmit="return confirm('Activer ?')">
+                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                    <button type="submit" class="btn btn-outline-success" title="activer">
+                                                                        <i class="fa-solid fa-check" aria-hidden="true"></i>
+                                                                    </button>
+                                                                </form>
+                                                                @endif 
+                                                        </div>
+                                                    </div>   
                                                 </td>                                                        
                                             </tr>
                                             @empty

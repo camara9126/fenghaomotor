@@ -12,45 +12,42 @@
                         <i class="fas fa-bar me-1"></i> Annuler
                     </a>
                 </div>
-                <div class="row justify-content-center">
-                    <div class="col-8">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                @if ($errors->any())
-                                    <div style="color: red; margin-bottom: 10px;">
-                                        @foreach ($errors->all() as $error)
-                                            <p>{{ $error }}</p>
-                                        @endforeach
-                                    </div>
-                                @endif
-                                    <form method="post" action="{{route('clients.update', $client->id)}}" class="contact-form">
-                                        @csrf
-                                        @method('PUT')
-                                        <h2 class="text-center mb-4">Edit client</h2>
-                                        <div class="mb-3">
-                                            <label for="name" class="form-label">Nom</label>
-                                            <input type="text" class="form-control" name="nom" value="{{$client->nom}}">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="telephone" class="form-label">Telephone</label>
-                                            <input type="text" class="form-control" name="telephone" value="{{$client->telephone}}">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="email" class="form-label">Email</label>
-                                            <input type="email" class="form-control" name="email" value="{{$client->email}}">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="adresse" class="form-label">Adresse</label>
-                                            <textarea class="form-control" name="adresse" rows="5" >{{$client->adresse}}</textarea>
-                                        </div>
-                                        <div class="d-grid">
-                                            <button type="submit" class="btn btn-warning btn-lg">Modifier</button>
-                                        </div>
-                                    </form>
-                                
+                <div class="card col-md-10 shadow-sm">
+                    <div class="card-body">
+                        @if ($errors->any())
+                            <div style="color: red; margin-bottom: 10px;">
+                                @foreach ($errors->all() as $error)
+                                    <p>{{ $error }}</p>
+                                @endforeach
                             </div>
-                        </div>
+                        @endif
+                            <form method="post" action="{{route('clients.update', $client->id)}}" class="contact-form">
+                                @csrf
+                                @method('PUT')
+                                <h2 class="text-center mb-4">Edit client</h2>
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Nom</label>
+                                    <input type="text" class="form-control" name="nom" value="{{$client->nom}}">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="telephone" class="form-label">Telephone</label>
+                                    <input type="text" class="form-control" name="telephone" value="{{$client->telephone}}">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" class="form-control" name="email" value="{{$client->email}}">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="adresse" class="form-label">Adresse</label>
+                                    <textarea class="form-control" name="adresse" rows="5" >{{$client->adresse}}</textarea>
+                                </div>
+                                <div class="d-grid">
+                                    <button type="submit" class="btn btn-warning btn-lg">Modifier</button>
+                                </div>
+                            </form>
+                        
                     </div>
                 </div>
+                    
             </section>
   @include('partials.footer')

@@ -90,6 +90,19 @@ class ClientController extends Controller
         return redirect()->route('clients.index')->with('success', 'Client modifié');
 
     }
+
+     /**
+     * Remove the specified resource from storage.
+     */
+     public function destroy(string $id)
+    {
+         $client= Client::findOrFail($id);
+
+         $client->destroy($id);
+
+        return redirect()->route('clients.index')->with('success', ' client supprimé avec succès');        
+
+    }
     
 
     // Creation nouveau client depuis la section 'Vente'

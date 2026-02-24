@@ -47,6 +47,11 @@ Route::middleware(['auth', 'entreprise.exists'])->group(function () {
     Route::get('/dashboard.rapport', [DashboardController::class, 'rapport'])->name('dashboard.rapport');
     Route::get('/dashboard.comptabilite', [DashboardController::class, 'comptabilite'])->name('dashboard.comptabilite');
     Route::get('/dashboard/stats', [DashboardController::class, 'stats'])->name('dashboard.stats');
+    // Page parametre
+    Route::get('/parametre', function () {
+    
+        return view('dashboard.parametre');
+    })->name('parametre');
 });
 
 

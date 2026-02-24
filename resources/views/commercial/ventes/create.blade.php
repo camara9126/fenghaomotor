@@ -11,7 +11,6 @@
                         <i class="fas fa-bar me-1"></i> Annuler
                     </a>
                 </div>
-                <div class="row justify-content-center">
                     @if(Session::has('success'))
                         <div class="alert alert-success" role="alert">
                             {{ Session::get('success') }}
@@ -21,8 +20,7 @@
                             {{ Session::get('danger') }}
                         </div>
                     @endif
-                    <div class="col-8">
-                        <div class="card shadow-sm">
+                        <div class="card col-md-10 shadow-sm">
                             <div class="card-body">
                                 @if ($errors->any())
                                     <div style="color: red; margin-bottom: 10px;">
@@ -137,8 +135,5 @@
                                 </div>
                             </div>
                         </div>                        
-                    </div>
-                </div>
-
             </section>
    @include('partials.footer')

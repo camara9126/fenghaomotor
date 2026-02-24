@@ -7,7 +7,6 @@
                 <!-- Stats Row -->
                 
                 <!-- Recent Orders -->
-                <div class="row">
                      @if(Session::has('success'))
                         <div class="alert alert-success" role="alert">
                             {{ Session::get('success') }}
@@ -17,18 +16,18 @@
                             {{ Session::get('danger') }}
                         </div>
                     @endif
-                    <div class="col-12">
-                        <div class="d-flex justify-content-between align-items-center mb-3">
+                    
+                    <div class="d-flex justify-content-between align-items-center mb-3">
 
                            
-                    <!-- Section Produits -->
+                        <!-- Section Produits -->
                         <h3 class="mb-0">Commandes</h3>
                         <a href="{{route('ventes.create')}}" class="btn btn-success">
                             <i class="fas fa-plus me-1"></i> Nouveau commande
                         </a>
                         </div>
                         <div class="stat-card">        
-                            <div class="card shadow-sm">
+                            <div class="card col-md-10 shadow-sm">
                                 <div class="card-body">
                                     @if ($errors->any())
                                         <div style="color: red; margin-bottom: 10px;">
@@ -40,7 +39,7 @@
                                     <div class="table-responsive">
                                         <!--<nav class="navbar navbar-light bg-light">-->
                                             <form method="get" action="{{route('ventes.search')}}" class="form-inline">
-                                               
+                                            
                                                 <input class="form-control mr-sm-2" type="search" name="search" placeholder="Rechercher par reference ou client..." aria-label="Search">                                                            
                                             
                                                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Rechercher</button>                                                    
@@ -82,7 +81,7 @@
                                                     <td>
                                                         @if($v->montant_restant == 0)
                                                             <button type="button" class="btn">
-                                                                 Payée
+                                                                Payée
                                                             </button>
                                                         @else
                                                         <button type="button" class="btn btn-success" data-bs-toggle="modal" data-id="{{$v->id}}" data-bs-target="#paiementModal">
@@ -164,8 +163,10 @@
                             </div>
                         </div>     
                     </div>
-                </div>
             </section>
+
+
+            
  <script>
         // Recuperation de l'ID de la vente
         document.addEventListener('DOMContentLoaded', function () {
