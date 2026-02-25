@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : ven. 13 fév. 2026 à 09:48
+-- Généré le : mer. 25 fév. 2026 à 10:19
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.1.25
 
@@ -91,14 +91,6 @@ CREATE TABLE `clients` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Déchargement des données de la table `clients`
---
-
-INSERT INTO `clients` (`id`, `nom`, `telephone`, `email`, `adresse`, `created_at`, `updated_at`) VALUES
-(1, 'baye mor', '788459220', NULL, NULL, '2026-02-10 11:32:23', '2026-02-10 11:32:23'),
-(2, 'saliou sy', '776003468', NULL, NULL, '2026-02-11 12:56:02', '2026-02-11 12:56:02');
-
 -- --------------------------------------------------------
 
 --
@@ -119,13 +111,6 @@ CREATE TABLE `depenses` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Déchargement des données de la table `depenses`
---
-
-INSERT INTO `depenses` (`id`, `user_id`, `reference`, `libelle`, `description`, `montant`, `date_depense`, `categorie_depense_id`, `mode_paiement`, `statut`, `created_at`, `updated_at`) VALUES
-(1, 1, 'DEP-1770885976', 'facture internet', NULL, 25000.00, '2026-02-12', 2, 'orange_money', 'recu', '2026-02-12 07:46:16', '2026-02-12 07:46:16');
 
 -- --------------------------------------------------------
 
@@ -151,7 +136,7 @@ CREATE TABLE `entreprises` (
 --
 
 INSERT INTO `entreprises` (`id`, `nom`, `telephone`, `adresse`, `devise`, `statut`, `created_at`, `updated_at`, `logo`, `taux_tva`) VALUES
-(1, 'Fenghao Motor SN', '771871814', 'Pikine-Sor, Saint-Louis, SENEGAL', 'XOF', 1, '2026-02-10 10:20:24', '2026-02-10 11:04:18', NULL, 18.00);
+(1, 'Fenghao Motor SN', '771871814', 'Pikine, Saint-Louis, SENEGAL', 'XOF', 1, '2026-02-10 10:20:24', '2026-02-20 12:38:31', NULL, 18.00);
 
 -- --------------------------------------------------------
 
@@ -185,13 +170,6 @@ CREATE TABLE `fournisseurs` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Déchargement des données de la table `fournisseurs`
---
-
-INSERT INTO `fournisseurs` (`id`, `nom`, `telephone`, `email`, `adresse`, `statut`, `created_at`, `updated_at`) VALUES
-(1, 'Alibaba', '3345677976', 'alibaba@gmail.com', NULL, 1, '2026-02-10 11:30:41', '2026-02-10 11:30:41');
 
 -- --------------------------------------------------------
 
@@ -287,20 +265,6 @@ CREATE TABLE `paiements` (
   `annule_le` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Déchargement des données de la table `paiements`
---
-
-INSERT INTO `paiements` (`id`, `vente_id`, `montant`, `mode_paiement`, `reference`, `date_paiement`, `created_at`, `updated_at`, `statut`, `motif`, `annule_par`, `annule_le`) VALUES
-(1, 1, 450000.00, 'cash', 'PAY-1770726915', '2026-02-10', '2026-02-10 11:35:15', '2026-02-10 11:35:15', 'valide', NULL, NULL, NULL),
-(2, 1, 81000.00, 'wave', 'PAY-1770726943', '2026-02-10', '2026-02-10 11:35:43', '2026-02-10 11:35:43', 'valide', NULL, NULL, NULL),
-(3, 2, 1000000.00, 'banque', 'PAY-1770818268', '2026-02-11', '2026-02-11 12:57:48', '2026-02-11 12:57:48', 'valide', NULL, NULL, NULL),
-(4, 2, 62000.00, 'cash', 'PAY-1770818471', '2026-02-11', '2026-02-11 13:01:11', '2026-02-11 13:03:42', 'annule', 'Annulation manuelle', 1, '2026-02-11 13:03:42'),
-(5, 2, 62000.00, 'orange_money', 'PAY-1770818635', '2026-02-11', '2026-02-11 13:03:55', '2026-02-11 13:03:55', 'valide', NULL, NULL, NULL),
-(6, 3, 400000.00, 'cash', 'PAY-1770899777', '2026-02-12', '2026-02-12 11:36:17', '2026-02-12 11:36:17', 'valide', NULL, NULL, NULL),
-(7, 4, 420000.00, 'banque', 'PAY-1770904275', '2026-02-12', '2026-02-12 12:51:15', '2026-02-12 12:51:15', 'valide', NULL, NULL, NULL),
-(8, 5, 420000.00, 'cash', 'PAY-1770904575', '2026-02-12', '2026-02-12 12:56:15', '2026-02-12 12:56:15', 'valide', NULL, NULL, NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -333,15 +297,6 @@ CREATE TABLE `produits` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Déchargement des données de la table `produits`
---
-
-INSERT INTO `produits` (`id`, `fournisseur_id`, `nom`, `code`, `prix_achat`, `prix_vente`, `stock`, `stock_min`, `statut`, `created_at`, `updated_at`) VALUES
-(1, 1, 'jakarta', 'PRD-00001', 315000.00, 450000.00, 10, 5, 1, '2026-02-10 11:31:35', '2026-02-12 11:36:55'),
-(2, 1, 'scooter', 'PRD-00002', 300000.00, 420000.00, 15, 5, 1, '2026-02-12 12:50:08', '2026-02-12 12:56:00'),
-(3, 1, 'yamaha', 'PRD-00003', 550000.00, 700000.00, 0, 5, 1, '2026-02-12 13:38:47', '2026-02-12 13:38:47');
-
 -- --------------------------------------------------------
 
 --
@@ -363,17 +318,6 @@ CREATE TABLE `recettes` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Déchargement des données de la table `recettes`
---
-
-INSERT INTO `recettes` (`id`, `user_id`, `reference`, `libelle`, `description`, `montant`, `date_recette`, `paiement_id`, `mode_paiement`, `statut`, `created_at`, `updated_at`) VALUES
-(1, 1, 'REC-1770726915', 'Paiement vente VNT-1770726879', NULL, 450000.00, '2026-02-10', 1, 'cash', 'recu', '2026-02-10 11:35:15', '2026-02-10 11:35:15'),
-(2, 1, 'REC-1770818636', 'Paiement vente VNT-1770818203', NULL, 62000.00, '2026-02-11', 5, 'orange_money', 'recu', '2026-02-11 13:03:56', '2026-02-11 13:03:56'),
-(3, 1, 'REC-1770899777', 'Paiement vente VNT-1770897588', NULL, 400000.00, '2026-02-12', 6, 'cash', 'recu', '2026-02-12 11:36:18', '2026-02-12 11:36:18'),
-(4, 1, 'REC-1770904275', 'Paiement vente VNT-1770904252', NULL, 420000.00, '2026-02-12', 7, 'banque', 'recu', '2026-02-12 12:51:15', '2026-02-12 12:51:15'),
-(5, 1, 'REC-1770904575', 'Paiement vente VNT-1770904560', NULL, 420000.00, '2026-02-12', 8, 'cash', 'recu', '2026-02-12 12:56:15', '2026-02-12 12:56:15');
-
 -- --------------------------------------------------------
 
 --
@@ -394,8 +338,8 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('COONcVaVO3PqWn6V114IiwtRZazIRBSpIHuM1vWC', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoicDhqdDVRYXpBcFJPNFZOalE3eXpuUkVOSk9KRDBJbGNNZXdFMzNDbyI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9kYXNoYm9hcmQiO31zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO30=', 1770909062),
-('YAwAjxRebCL40ZudjsISuN8IKtmhq2NUFulvliD4', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiSXBvNjl2VlV1ZGszWWpFeG9KTk1Oa3hXV04yZHFENVozeTNocmwzTyI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjI4OiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvY29tcHRlIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTt9', 1770972435);
+('6oz2aY7rI6LcXygCoxfw2hjY4l7TGeH50WcHC1fd', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiNHFWWjhrallWWWRkZ3I1cEZLNllieWRUY3J6SXJhOEpoc2FWaU5EUyI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMS9sb2dpbiI7fX0=', 1771942204),
+('E6aIMSqAI3VnTx5kI3dwc2JAfmVQTnIXrLjaKSlK', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiZ2hrSDl6MTZjYUxPYmxndVBPZEtuckdqbEhLRHM5UjlESllnS2g2RiI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjg6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMS92ZW50ZXMiO31zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO30=', 1772011055);
 
 -- --------------------------------------------------------
 
@@ -414,16 +358,6 @@ CREATE TABLE `stock_mouvements` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Déchargement des données de la table `stock_mouvements`
---
-
-INSERT INTO `stock_mouvements` (`id`, `produit_id`, `type`, `quantite`, `reference`, `note`, `user_id`, `created_at`, `updated_at`) VALUES
-(1, 1, 'entree', 10, 'ENT-1770726859', NULL, 1, '2026-02-10 11:34:19', '2026-02-10 11:34:19'),
-(2, 1, 'sortie', 1, 'SRT-1770727555', NULL, 1, '2026-02-10 11:45:55', '2026-02-10 11:45:55'),
-(3, 1, 'entree', 5, 'ENT-1770899815', NULL, 1, '2026-02-12 11:36:55', '2026-02-12 11:36:55'),
-(4, 2, 'entree', 15, 'ENT-1770904231', NULL, 1, '2026-02-12 12:50:31', '2026-02-12 12:50:31');
 
 -- --------------------------------------------------------
 
@@ -471,17 +405,6 @@ CREATE TABLE `ventes` (
   `total_ttc` decimal(15,2) NOT NULL DEFAULT 0.00
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Déchargement des données de la table `ventes`
---
-
-INSERT INTO `ventes` (`id`, `client_id`, `reference`, `date`, `total`, `statut`, `user_id`, `created_at`, `updated_at`, `total_tva`, `total_ttc`) VALUES
-(1, 1, 'VNT-1770726879', '2026-02-10', 450000.00, 'payee', 1, '2026-02-10 11:34:39', '2026-02-10 11:35:43', 81000.00, 531000.00),
-(2, 2, 'VNT-1770818203', '2026-02-11', 900000.00, 'payee', 1, '2026-02-11 12:56:43', '2026-02-11 13:03:56', 162000.00, 1062000.00),
-(3, 2, 'VNT-1770897588', '2026-02-12', 450000.00, 'partielle', 1, '2026-02-12 10:59:48', '2026-02-12 11:36:17', 81000.00, 531000.00),
-(4, 2, 'VNT-1770904252', '2026-02-12', 420000.00, 'payee', 1, '2026-02-12 12:50:52', '2026-02-12 12:51:15', 75600.00, 495600.00),
-(5, 2, 'VNT-1770904560', '2026-02-12', 420000.00, 'payee', 1, '2026-02-12 12:56:00', '2026-02-12 12:56:15', 75600.00, 495600.00);
-
 -- --------------------------------------------------------
 
 --
@@ -501,17 +424,6 @@ CREATE TABLE `vente_items` (
   `montant_tva` decimal(15,2) NOT NULL DEFAULT 0.00,
   `total_ttc` decimal(15,2) NOT NULL DEFAULT 0.00
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Déchargement des données de la table `vente_items`
---
-
-INSERT INTO `vente_items` (`id`, `vente_id`, `produit_id`, `quantite`, `prix_unitaire`, `total`, `created_at`, `updated_at`, `taux_tva`, `montant_tva`, `total_ttc`) VALUES
-(1, 1, 1, 1, 450000.00, 450000.00, '2026-02-10 11:34:39', '2026-02-10 11:34:39', 18.00, 81000.00, 531000.00),
-(2, 2, 1, 2, 450000.00, 900000.00, '2026-02-11 12:56:43', '2026-02-11 12:56:43', 18.00, 162000.00, 1062000.00),
-(3, 3, 1, 1, 450000.00, 450000.00, '2026-02-12 10:59:48', '2026-02-12 10:59:48', 18.00, 81000.00, 531000.00),
-(4, 4, 2, 1, 420000.00, 420000.00, '2026-02-12 12:50:53', '2026-02-12 12:50:53', 18.00, 75600.00, 495600.00),
-(5, 5, 2, 1, 420000.00, 420000.00, '2026-02-12 12:56:00', '2026-02-12 12:56:00', 18.00, 75600.00, 495600.00);
 
 --
 -- Index pour les tables déchargées
@@ -678,7 +590,7 @@ ALTER TABLE `clients`
 -- AUTO_INCREMENT pour la table `depenses`
 --
 ALTER TABLE `depenses`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `entreprises`
@@ -714,7 +626,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT pour la table `paiements`
 --
 ALTER TABLE `paiements`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT pour la table `produits`
@@ -726,31 +638,31 @@ ALTER TABLE `produits`
 -- AUTO_INCREMENT pour la table `recettes`
 --
 ALTER TABLE `recettes`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT pour la table `stock_mouvements`
 --
 ALTER TABLE `stock_mouvements`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `ventes`
 --
 ALTER TABLE `ventes`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT pour la table `vente_items`
 --
 ALTER TABLE `vente_items`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Contraintes pour les tables déchargées
